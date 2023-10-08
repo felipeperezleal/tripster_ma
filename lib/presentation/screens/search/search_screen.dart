@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-  static const name = 'home-screen';
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
+  static const name = 'search-screen';
 
   @override
   Widget build(BuildContext context) {
