@@ -4,8 +4,8 @@ import 'package:tripster_ma/presentation/screens/screens.dart';
 final appRouter = GoRouter(initialLocation: '/', routes: [
   GoRoute(
     path: '/',
-    name: HomeScreen.name,
-    builder: (context, state) => const HomeScreen(),
+    name: InitialScreen.name,
+    builder: (context, state) => const InitialScreen(),
   ),
   GoRoute(
     path: '/login',
@@ -16,6 +16,11 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
     path: '/register',
     name: RegisterScreen.name,
     builder: (context, state) => const RegisterScreen(),
+  ),
+  GoRoute(
+    path: '/home',
+    name: HomeScreen.name,
+    builder: (context, state) => const HomeScreen(),
   ),
   GoRoute(
     path: '/profile',
