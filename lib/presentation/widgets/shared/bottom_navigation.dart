@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({super.key});
+  const BottomNavigation({
+    super.key,
+    required this.selectedIndex,
+    required this.onItemTapped,
+  });
 
+  final int selectedIndex;
+  final Function(int) onItemTapped;
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       elevation: 0,
+      currentIndex: selectedIndex,
+      onTap: onItemTapped,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
