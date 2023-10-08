@@ -12,7 +12,7 @@ class RegisterScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FilledButton(
+            ElevatedButton(
               onPressed: () {
                 context.replace('/Login');
               },

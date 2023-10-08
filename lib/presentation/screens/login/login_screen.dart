@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FilledButton(
+            ElevatedButton(
               onPressed: () {
                 context.pop();
                 context.replace('/home');

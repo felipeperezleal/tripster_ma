@@ -50,7 +50,7 @@ class _MainButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
+    return ElevatedButton(
       onPressed: () {
         if (text == 'Log In') {
           context.push('/login');
