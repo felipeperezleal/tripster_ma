@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="tripster_ma"
+        android:label="Tripster"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
