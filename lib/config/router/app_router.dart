@@ -32,4 +32,9 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
     name: SearchScreen.name,
     builder: (context, state) => const SearchScreen(),
   ),
+  GoRoute(
+    path: '/booking',
+    name: BookingScreen.name,
+    builder: (context, state) => const BookingScreen(),
+  ),
 ]);

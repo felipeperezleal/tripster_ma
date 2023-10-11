@@ -15,6 +15,7 @@ class BottomNavigation extends StatelessWidget {
       elevation: 0,
       currentIndex: selectedIndex,
       onTap: onItemTapped,
+      type: BottomNavigationBarType.fixed,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -23,6 +24,10 @@ class BottomNavigation extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
           label: "Search",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.edit_calendar_outlined),
+          label: "Booking",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
