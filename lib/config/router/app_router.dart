@@ -37,4 +37,9 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
     name: BookingScreen.name,
     builder: (context, state) => const BookingScreen(),
   ),
+  GoRoute(
+    path: '/FlightsCRUD',
+    name: FlightsCRUDScreen.name,
+    builder: (context, state) => const FlightsCRUDScreen(),
+  ),
 ]);

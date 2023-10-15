@@ -32,6 +32,8 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^11.1.2
+  graphql_flutter: ^5.1.2
+  intl: ^0.17.0
 
 dev_dependencies:
 

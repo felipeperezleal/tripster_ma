@@ -33,6 +33,10 @@ class BottomNavigation extends StatelessWidget {
           icon: Icon(Icons.person),
           label: "Profile",
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.connecting_airports_outlined),
+          label: "FlightsCRUD",
+        ),
       ],
     );
   }
