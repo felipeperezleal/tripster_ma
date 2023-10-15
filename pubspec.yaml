@@ -32,6 +32,10 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^11.1.2
+  syncfusion_flutter_datepicker: ^23.1.40
+  intl: ^0.18.1
+  http: ^1.1.0
+  graphql: ^5.2.0-beta.6
 
 dev_dependencies:
 

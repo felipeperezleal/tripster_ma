@@ -35,6 +35,6 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
   GoRoute(
     path: '/booking',
     name: BookingScreen.name,
-    builder: (context, state) => const BookingScreen(),
+    builder: (context, state) => BookingScreen(),
   ),
 ]);
