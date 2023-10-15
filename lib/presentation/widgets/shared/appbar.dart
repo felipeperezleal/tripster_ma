@@ -18,7 +18,7 @@ class Appbar extends StatelessWidget {
               const Spacer(),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.search),
+                icon: const Icon(Icons.person),
                 color: colors.primary,
               ),
             ],
