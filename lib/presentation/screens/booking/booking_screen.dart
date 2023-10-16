@@ -125,7 +125,7 @@ class BookingScreenState extends State<BookingScreen> {
 
                 // Convierte el mapa a una cadena JSON
                 String jsonText = jsonEncode(formData);
-                print(jsonText);
+                log(jsonText);
 
                 final GraphQLClient client = GraphQLClient(
                   link: httpLink,
