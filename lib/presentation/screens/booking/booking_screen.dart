@@ -1,18 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:graphql/client.dart';
 
 class BookingScreen extends StatefulWidget {
-  BookingScreen({super.key});
+  const BookingScreen({super.key});
   static const name = 'booking-screen';
   @override
-  _BookingScreenState createState() => _BookingScreenState();
+  BookingScreenState createState() => BookingScreenState();
 }
 
-class _BookingScreenState extends State<BookingScreen> {
-  String CurrenDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+class BookingScreenState extends State<BookingScreen> {
+  String currenDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   TimeOfDay selectedTime = TimeOfDay.now();
   final TextEditingController userController = TextEditingController();
   final TextEditingController flightController = TextEditingController();
@@ -34,12 +35,12 @@ class _BookingScreenState extends State<BookingScreen> {
       final DateTime? date = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
-          firstDate: DateTime.now().subtract(Duration(days: 365 * 2)),
-          lastDate: DateTime.now().add(Duration(days: 365 * 2)));
+          firstDate: DateTime.now().subtract(const Duration(days: 365 * 2)),
+          lastDate: DateTime.now().add(const Duration(days: 365 * 2)));
 
       if (date != null) {
         setState(() {
-          CurrenDate = DateFormat("yyyy-MM-dd").format(date);
+          currenDate = DateFormat("yyyy-MM-dd").format(date);
         });
       }
     }
@@ -65,33 +66,33 @@ class _BookingScreenState extends State<BookingScreen> {
             TextField(
               controller: userController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Usuario'),
+              decoration: const InputDecoration(labelText: 'Usuario'),
             ),
             TextField(
               controller: flightController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Vuelo'),
+              decoration: const InputDecoration(labelText: 'Vuelo'),
             ),
             TextField(
               controller: stateController,
-              decoration: InputDecoration(labelText: 'Estado'),
+              decoration: const InputDecoration(labelText: 'Estado'),
             ),
             TextField(
               controller: priceController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Precio'),
+              decoration: const InputDecoration(labelText: 'Precio'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(children: [
-                  Text("Fecha: ${CurrenDate}"),
+                  Text("Fecha: $currenDate"),
                   IconButton(
                       onPressed: () {
                         getCurrent(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.date_range,
                         size: 35,
                       )),
@@ -102,21 +103,21 @@ class _BookingScreenState extends State<BookingScreen> {
                       onPressed: () {
                         getCurrentTime(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.av_timer,
                         size: 35,
                       )),
                 ]),
               ],
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () async {
                 formData['booking_user_id'] =
                     int.tryParse(userController.text) ?? 0;
                 formData['booking_flight_id'] =
                     int.tryParse(flightController.text) ?? 0;
-                formData['booking_date'] = CurrenDate;
+                formData['booking_date'] = currenDate;
                 formData['booking_time'] = formatTimeOfDay(selectedTime);
                 formData['booking_state'] = stateController.text;
                 formData['booking_price'] =
@@ -156,8 +157,8 @@ class _BookingScreenState extends State<BookingScreen> {
                     'booking_price': formData['booking_price'],
                   },
                 };
-                print('VARIABLES');
-                print(json.encode(variables));
+                log('VARIABLES');
+                log(json.encode(variables));
 
                 // Realiza la mutación
                 String mensaje = "Reserva registrada con éxito";
@@ -178,13 +179,13 @@ class _BookingScreenState extends State<BookingScreen> {
                 final snackBar = SnackBar(
                   content: Text(mensaje),
                   backgroundColor: color,
-                  duration:
-                      Duration(seconds: 5), // Duración del mensaje en segundos
+                  duration: const Duration(
+                      seconds: 5), // Duración del mensaje en segundos
                 );
 
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
-              child: Text('Enviar'),
+              child: const Text('Enviar'),
             ),
           ],
         ),

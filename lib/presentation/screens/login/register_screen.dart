@@ -1,19 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
-import 'package:http/http.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
   static const name = 'register-screen';
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  RegisterScreenState createState() => RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nombreController = TextEditingController();
   final TextEditingController apellidoController = TextEditingController();
@@ -53,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     ScaffoldMessenger.of(scaffoldContext).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(seconds: 10),
+        duration: const Duration(seconds: 10),
       ),
     );
   }
@@ -123,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.symmetric(vertical: 10),
                 width: 300, // Ancho deseado
                 child: Row(
                   children: [
@@ -200,7 +200,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     };
 
-                    print(json.encode(variables));
+                    log(json.encode(variables));
                     // Realiza la mutación
                     final QueryResult result = await client.mutate(
                       MutationOptions(
