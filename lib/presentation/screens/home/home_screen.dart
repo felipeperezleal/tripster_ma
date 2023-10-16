@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         return const SearchScreen();
       case 2:
-        return const BookingScreen();
+        return BookingScreen();
       case 3:
         return const ProfileScreen();
       case 4:
