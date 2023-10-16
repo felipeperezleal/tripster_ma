@@ -165,6 +165,7 @@ class BookingScreenState extends State<BookingScreen> {
                 Color color = Colors.green;
 
                 try {
+                  // ignore: unused_local_variable
                   final QueryResult result = await client.mutate(
                     MutationOptions(
                       document: gql(createBookingMutation),
