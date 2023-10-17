@@ -250,11 +250,14 @@ class SearchButton extends StatelessWidget {
     } else {
       final routeData = queryResult.data!['getRoute'];
 
-      final orderingString = routeData['ordering']
-          .toString()
+      var orderingString = routeData['ordering'].toString();
+
+      orderingString = orderingString
+          .replaceAll(') ', '), ')
           .replaceAll('[', '')
           .replaceAll(']', '');
-      orderingList = orderingString.split(' ');
+
+      orderingList = orderingString.split(', ');
       log('Ordering List: $orderingList');
 
       onOrderingListReceived(orderingList);
