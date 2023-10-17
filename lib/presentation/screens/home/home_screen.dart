@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         return const SearchScreen();
       case 2:
-        return BookingScreen();
+        return const BookingScreen();
       case 3:
         return const ProfileScreen();
       default:
@@ -59,8 +59,23 @@ class _HomePage extends StatelessWidget {
     return const Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Tripster home page'),
+            Text(
+              'Where would you like to go today?',
+              style: TextStyle(
+                fontSize: 24,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Tripster is an application that provides the best travel options based on your flight preferences. Whether your interest is in finding the most affordable flight, reaching a destination quickly, or comparing offers from different airlines, Tripster makes it possible.',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),

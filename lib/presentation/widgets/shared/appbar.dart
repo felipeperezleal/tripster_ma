@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Appbar extends StatelessWidget {
   const Appbar({super.key});
@@ -16,10 +17,21 @@ class Appbar extends StatelessWidget {
             children: [
               Image.asset('assets/images/icon/tripster.png'),
               const Spacer(),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.person),
-                color: colors.primary,
+              PopupMenuButton(
+                onSelected: (value) {
+                  if (value == 'logout') {
+                    context.replace('/');
+                  }
+                },
+                icon: Icon(Icons.person, color: colors.primary),
+                itemBuilder: (BuildContext context) {
+                  return [
+                    const PopupMenuItem(
+                      value: 'logout',
+                      child: Text('Log Out'),
+                    ),
+                  ];
+                },
               ),
             ],
           ),
