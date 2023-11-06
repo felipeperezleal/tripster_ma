@@ -1,16 +1,28 @@
-# tripster_ma
+# Tripster - Frontend
 
-A new Flutter project.
+## Requisitos
+- Lista de requisitos para ejecutar la aplicación, por ejemplo:
+  - Flutter SDK
+  - Dart SDK
+  - Otros requisitos específicos de tu proyecto.
 
-## Getting Started
+## Instalación
+# Clona el repositorio
+```bash
+git clone https://github.com/felipeperezleal/tripster_ma.git
+```
 
-This project is a starting point for a Flutter application.
+# Ingresa al directorio del proyecto
+```bash
+cd tripster_ma
+```
 
-A few resources to get you started if this is your first Flutter project:
+# Instala las dependencias
+```bash
+flutter pub get
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Ejecuta la aplicación
+```bsah
+flutter run
+```

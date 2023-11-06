@@ -15,7 +15,7 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
   GoRoute(
     path: '/register',
     name: RegisterScreen.name,
-    builder: (context, state) => RegisterScreen(),
+    builder: (context, state) => const RegisterScreen(),
   ),
   GoRoute(
     path: '/home',
@@ -35,7 +35,7 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
   GoRoute(
     path: '/booking',
     name: BookingScreen.name,
-    builder: (context, state) => BookingScreen(),
+    builder: (context, state) => const BookingScreen(),
   ),
   GoRoute(
     path: '/FlightsCRUD',
