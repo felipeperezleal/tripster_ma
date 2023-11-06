@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class FlightsCRUD extends StatefulWidget {
-  FlightsCRUD({Key? key}) : super(key: key);
+  const FlightsCRUD({Key? key}) : super(key: key);
   static const name = 'flights-CRUD';
 
 @override

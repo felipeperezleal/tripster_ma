@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 3:
         return const ProfileScreen();
       case 4:
-        return const FlightsCRUDScreen();
+        return const FlightsCRUD();
       default:
         return const _HomePage();
     }
