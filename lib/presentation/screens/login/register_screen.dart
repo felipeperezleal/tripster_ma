@@ -42,7 +42,7 @@ class RegisterScreenState extends State<RegisterScreen> {
 
   String formattedDate(DateTime? date) {
     if (date == null) {
-      return 'Seleccionar fecha de cumpleaños';
+      return 'Please select a date';
     } else {
       final formatter = DateFormat('yyyy-MM-dd');
       return formatter.format(date);
@@ -64,7 +64,7 @@ class RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Registro'),
+        title: const Text('Register'),
       ),
       body: Center(
         child: Padding(
@@ -72,6 +72,14 @@ class RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Text(
+                'Create your account',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+              const SizedBox(height: 20),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 width: 300, // Ancho deseado
@@ -85,7 +93,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                 width: 300, // Ancho deseado
                 child: TextField(
                   controller: nombreController,
-                  decoration: const InputDecoration(labelText: 'Nombre'),
+                  decoration: const InputDecoration(labelText: 'Name'),
                 ),
               ),
               Container(
@@ -93,7 +101,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                 width: 300, // Ancho deseado
                 child: TextField(
                   controller: apellidoController,
-                  decoration: const InputDecoration(labelText: 'Apellido'),
+                  decoration: const InputDecoration(labelText: 'Lastname'),
                 ),
               ),
               Container(
@@ -101,7 +109,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                 width: 300, // Ancho deseado
                 child: TextField(
                   controller: direccionController,
-                  decoration: const InputDecoration(labelText: 'Dirección'),
+                  decoration: const InputDecoration(labelText: 'Address'),
                 ),
               ),
               Container(
@@ -109,7 +117,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                 width: 300, // Ancho deseado
                 child: TextField(
                   controller: claveController,
-                  decoration: const InputDecoration(labelText: 'Clave'),
+                  decoration: const InputDecoration(labelText: 'Password'),
                   obscureText: true,
                 ),
               ),
@@ -118,7 +126,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                 width: 300, // Ancho deseado
                 child: TextField(
                   controller: telefonoController,
-                  decoration: const InputDecoration(labelText: 'Teléfono'),
+                  decoration: const InputDecoration(labelText: 'Phone Number'),
                   keyboardType: TextInputType.phone,
                 ),
               ),
@@ -129,12 +137,11 @@ class RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Fecha de Cumpleaños: ${formattedDate(selectedDate)}',
+                        'Birthday Date: ${formattedDate(selectedDate)}',
                       ),
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        _showSnackBar(scaffoldContext, 'prueba');
                         final newDate = await _selectDate(context);
                         if (newDate != null) {
                           setState(() {
@@ -142,7 +149,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                           });
                         }
                       },
-                      child: const Text('Seleccionar Fecha'),
+                      child: const Text('Select Date'),
                     ),
                   ],
                 ),
@@ -211,20 +218,20 @@ class RegisterScreenState extends State<RegisterScreen> {
 
                     if (result.hasException) {
                       _showSnackBar(scaffoldContext,
-                          'Error en la mutación: ${result.exception.toString()}');
+                          'Mutation error: ${result.exception.toString()}');
                     } else {
                       _showSnackBar(
-                          scaffoldContext, 'Usuario registrado con éxito');
+                          scaffoldContext, 'User successfully registered');
                     }
                   } else {
-                    _showSnackBar(scaffoldContext,
-                        'Por favor, completa todos los campos');
+                    _showSnackBar(
+                        scaffoldContext, 'Please complete all fields.');
                   }
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(200, 50),
                 ),
-                child: const Text('Registrarse'),
+                child: const Text('Register'),
               ),
             ],
           ),
