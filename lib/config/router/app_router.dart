@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:tripster_ma/presentation/screens/flightsCRUD/create_country.dart';
 import 'package:tripster_ma/presentation/screens/screens.dart';
 
 final appRouter = GoRouter(initialLocation: '/', routes: [
@@ -39,7 +40,12 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
   ),
   GoRoute(
     path: '/FlightsCRUD',
-    name: FlightsCRUDScreen.name,
-    builder: (context, state) => const FlightsCRUDScreen(),
+    name: FlightsCRUD.name,
+    builder: (context, state) => const FlightsCRUD(),
+  ),
+  GoRoute(
+    path: '/CreateCountry',
+    name: CreateCountry.name,
+    builder: (context, state) => const CreateCountry(),
   ),
 ]);
