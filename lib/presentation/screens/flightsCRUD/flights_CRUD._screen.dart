@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:intl/intl.dart';
-import 'dart:convert';
-import 'package:http/http.dart';
 
 class FlightsCRUD extends StatefulWidget {
   const FlightsCRUD({Key? key}) : super(key: key);
   static const name = 'flights-CRUD';
 
-@override
-  _FlightsCRUD createState() => _FlightsCRUD();
+  @override
+  State<FlightsCRUD> createState() => _FlightsCRUD();
 }
-
-
 
 class _FlightsCRUD extends State<FlightsCRUD> {
   @override
