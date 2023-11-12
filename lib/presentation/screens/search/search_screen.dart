@@ -221,7 +221,6 @@ class SearchForm extends StatelessWidget {
     );
 
     if (queryResult.hasException) {
-      log(queryResult.exception.toString());
     } else {
       final dropdownItems = queryResult.data!['getFlights'];
 
@@ -286,7 +285,6 @@ class SearchButton extends StatelessWidget {
             }
           };
 
-          log(json.encode(variables));
           final QueryResult result = await client.mutate(
             MutationOptions(
               document: gql(createRouteMutation),
@@ -294,7 +292,6 @@ class SearchButton extends StatelessWidget {
             ),
           );
           if (result.hasException) {
-            log(result.exception.toString());
           } else {
             getRouteQuery(result, client);
           }
@@ -344,7 +341,6 @@ class SearchButton extends StatelessWidget {
     );
 
     if (queryResult.hasException) {
-      log(queryResult.exception.toString());
     } else {
       final routeData = queryResult.data!['getRoute'];
 
@@ -356,7 +352,6 @@ class SearchButton extends StatelessWidget {
           .replaceAll(']', '');
 
       orderingList = orderingString.split(', ');
-      log('Ordering List: $orderingList');
 
       onOrderingListReceived(orderingList);
     }
