@@ -82,7 +82,7 @@ class _HomePage extends StatelessWidget {
           Stack(
             alignment: Alignment.center,
             children: [
-              Image.network(
+              Image.asset(
                 backgroundImageUrl,
                 height: screenHeight * 0.55,
                 width: screenWidth,
