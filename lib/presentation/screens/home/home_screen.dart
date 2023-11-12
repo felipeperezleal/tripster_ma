@@ -60,71 +60,139 @@ class _HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    const String backgroundImageUrl = 'assets/images/airplane.jpg';
 
     final List<String> imageList = [
-      'https://media.istockphoto.com/id/488381656/es/foto/tome-la-salida-de-avión.jpg?s=170667a&w=0&k=20&c=KhctOp64GTb1nFflRDv93J9-goG2NjcEd8gPXWOACQ4=',
-      'https://media.istockphoto.com/id/486836087/photo/business-travel.jpg?s=612x612&w=0&k=20&c=B2jcARGGKEQBsc4sl9unuKd9FlkjUkl3jD6MsXYH5Ac=',
+      'https://picsum.photos/id/256/800/200',
+      'https://picsum.photos/id/265/800/200',
+      'https://picsum.photos/id/212/800/200',
+    ];
+
+    final List<String> descriptions = [
+      'Explore the vibrant culture and rich history of this stunning destination.',
+      'Discover breathtaking landscapes and outdoor adventures.',
+      'Experience the ultimate city life with endless entertainment and dining options.'
     ];
 
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: screenHeight),
-            child: IntrinsicHeight(
+      body: Column(
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.network(
+                backgroundImageUrl,
+                height: screenHeight * 0.55,
+                width: screenWidth,
+                fit: BoxFit.cover,
+              ),
+              Container(
+                height: screenHeight * 0.55,
+                width: screenWidth,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ),
+              const Text(
+                'With Tripster, find the perfect flight at swift routes, and from a variety of airlines.',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Container(
+              width: screenWidth,
+              color: Colors.grey[200],
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Spacer(),
-                    Text(
-                      'Ready for your next adventure?',
-                      style: TextStyle(
-                        fontSize: 28,
-                        color: colors.primary,
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: imageList.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    String url = entry.value;
+
+                    return Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: _ImageCards(
+                            url: url,
+                            screenHeight: screenHeight,
+                            descriptions: descriptions,
+                            index: index,
+                            colors: colors),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 24),
-                    SizedBox(
-                      height: screenHeight * 0.4,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          imageList[0],
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Discover new destinations and explore the world with Tripster. Find the best travel options tailored to your preferences.',
-                      style: TextStyle(
-                        fontSize: 16,
-                        height: 1.5,
-                        color: colors.onSurface,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const Spacer(),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: colors.onPrimary,
-                        backgroundColor: colors.primary,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 32, vertical: 16),
-                      ),
-                      child: const Text('Start Exploring'),
-                    ),
-                    const Spacer(flex: 2),
-                  ],
+                    );
+                  }).toList(),
                 ),
               ),
             ),
           ),
-        ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ImageCards extends StatelessWidget {
+  const _ImageCards({
+    required this.url,
+    required this.screenHeight,
+    required this.descriptions,
+    required this.index,
+    required this.colors,
+  });
+
+  final String url;
+  final double screenHeight;
+  final List<String> descriptions;
+  final int index;
+  final ColorScheme colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 3,
+            child: ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(8.0)),
+              child: Image.network(
+                url,
+                fit: BoxFit.cover,
+                height: screenHeight * 0.2,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  descriptions[index],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: colors.onSurface,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
