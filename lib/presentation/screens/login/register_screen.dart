@@ -172,7 +172,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                       telefono.isNotEmpty &&
                       selectedDate != null) {
                     final HttpLink httpLink = HttpLink(
-                      'http://localhost:5000/graphql?',
+                      'http://localhost/graphql?',
                     );
                     // Reemplaza con tu URL GraphQL
 

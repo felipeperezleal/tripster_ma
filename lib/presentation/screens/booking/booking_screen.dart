@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:graphql/client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -21,7 +23,7 @@ class BookingScreenState extends State<BookingScreen> {
   final TextEditingController priceController = TextEditingController();
   Map<String, dynamic> formData = {};
 
-  final HttpLink httpLink = HttpLink('http://localhost:5000/graphql?');
+  final HttpLink httpLink = HttpLink('http://localhost/graphql?');
 
   String formatTimeOfDay(TimeOfDay timeOfDay) {
     final hour = timeOfDay.hour.toString().padLeft(2, '0');
@@ -29,7 +31,36 @@ class BookingScreenState extends State<BookingScreen> {
     return '$hour:$minute';
   }
 
+  Future<String?> _cargarPreferencias() async {
+    // Obtain shared preferences.
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? action = prefs.getString('token');
+    return action;
+  }
+
   @override
+  void initState() {
+    super.initState();
+    // Llama a la función que deseas ejecutar al cargar el screen
+    cargarUsuarioDesdePreferencias();
+  }
+
+  // Función para cargar el usuario desde las preferencias
+  Future<void> cargarUsuarioDesdePreferencias() async {
+    final String? usuario = await _cargarPreferencias();
+    Map<String, dynamic>? decodedToken;
+    if (usuario != null) {
+      decodedToken = JwtDecoder.decode(usuario);
+    }
+    String? email = decodedToken?['email'];
+
+    if (email != null) {
+      userController.text = email;
+    } else {
+      userController.text = "Default";
+    }
+  }
+
   Widget build(BuildContext context) {
     Future<void> getCurrent(BuildContext context) async {
       final DateTime? date = await showDatePicker(
@@ -65,7 +96,6 @@ class BookingScreenState extends State<BookingScreen> {
           children: [
             TextField(
               controller: userController,
-              keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: 'Usuario'),
             ),
             TextField(

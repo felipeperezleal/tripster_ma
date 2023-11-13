@@ -163,7 +163,7 @@ class SearchButton extends StatelessWidget {
 
         if (origin.isNotEmpty && destiny.isNotEmpty) {
           final HttpLink httpLink = HttpLink(
-            'http://localhost:5000/graphql?',
+            'http://localhost/graphql?',
           );
 
           final GraphQLClient client = GraphQLClient(

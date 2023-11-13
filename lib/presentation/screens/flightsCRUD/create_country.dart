@@ -53,7 +53,7 @@ class _CreateCountry extends State<CreateCountry> {
 
                   if (country.isNotEmpty) {
                     final HttpLink httpLink = HttpLink(
-                      'http://localhost:5000/graphql?',
+                      'http://localhost/graphql?',
                     );
                     // Reemplaza con tu URL GraphQL
 

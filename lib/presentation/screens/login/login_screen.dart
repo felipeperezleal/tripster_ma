@@ -1,10 +1,10 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'dart:convert';
 import 'dart:developer';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -83,7 +83,7 @@ class LoginFormState extends State<LoginScreen> {
 
                       if (email.isNotEmpty && password.isNotEmpty) {
                         final HttpLink httpLink = HttpLink(
-                          'http://localhost:5000/graphql?',
+                          'http://localhost/graphql?',
                         );
                         final GraphQLClient client = GraphQLClient(
                           link: httpLink,
@@ -114,13 +114,55 @@ class LoginFormState extends State<LoginScreen> {
                             variables: variables,
                           ),
                         );
-                        List? repositories = result.data?['token']?['msg'];
-                        //log(repositories.token)
+                        log(result.data.toString());
+
+                        String key = "";
+                        String response = "";
+                        if (result.data != null) {
+                          // Convertir result.data a formato JSON
+                          String jsonData = jsonEncode(result.data);
+
+                          // Imprimir el JSON resultante
+                          // print(jsonData);
+                          Map<String, dynamic> jsonMap = json.decode(jsonData);
+                          // jsonMap[1].toString();
+
+                          if (jsonMap.containsKey("getLogin")) {}
+
+                          for (var entry in jsonMap.entries) {
+                            // print('Clave: ${entry.key}, Valor: ${entry.value}');
+                            if (entry.key == "getLogin") {
+                              Map<String, dynamic> jsonMap2 = entry.value;
+                              for (var ent in jsonMap2.entries) {
+                                if (ent.value != null) {
+                                  key = ent.key;
+                                  response = ent.value;
+                                  print(
+                                      'Clave: ${ent.key}, Valor: ${ent.value}');
+                                }
+                              }
+                            }
+                          }
+                        } else {
+                          print('La propiedad data es nula en el resultado');
+                        }
 
                         if (result.hasException) {
                           _showSnackBar(scaffoldContext,
-                              'Mutation error: ${result.exception.toString()}');
+                              '(LDAP) Mutation error: ${result.exception.toString()}');
+                        } else if (key == "msg") {
+                          _showSnackBar(scaffoldContext, '${response}');
                         } else {
+                          try {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            await prefs.setString(key, response);
+                            final storage = new FlutterSecureStorage();
+                            await storage.write(key: "jwt", value: response);
+                          } catch (error) {
+                            _showSnackBar(scaffoldContext, '${error}');
+                          }
+
                           context.go('/home');
                         }
                       }
