@@ -190,7 +190,7 @@ class SearchForm extends StatelessWidget {
     final List<String> orderingList = ['Choose an option'];
 
     final HttpLink httpLink = HttpLink(
-      'http://localhost:5000/graphql?',
+      'http://localhost/graphql?',
     );
 
     final GraphQLClient client = GraphQLClient(
