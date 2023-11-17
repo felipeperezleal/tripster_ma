@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+Future<String?> _cargarPreferencias() async {
+  // Obtain shared preferences.
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final String? action = prefs.getString('token');
+  return action;
+}
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -19,6 +27,12 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // Llama a la función que deseas ejecutar al cargar el screen
+    _cargarPreferencias();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -192,9 +206,12 @@ class SearchForm extends StatelessWidget {
     final HttpLink httpLink = HttpLink(
       'http://localhost/graphql?',
     );
+    final String? token = await _cargarPreferencias();
+    final AuthLink authLink = AuthLink(getToken: () async => 'Bearer $token');
+    final Link link = authLink.concat(httpLink);
 
     final GraphQLClient client = GraphQLClient(
-      link: httpLink,
+      link: link,
       cache: GraphQLCache(),
     );
 
@@ -259,9 +276,13 @@ class SearchButton extends StatelessWidget {
           final HttpLink httpLink = HttpLink(
             'http://localhost/graphql?',
           );
+          final String? token = await _cargarPreferencias();
+          final AuthLink authLink =
+              AuthLink(getToken: () async => 'Bearer $token');
+          final Link link = authLink.concat(httpLink);
 
           final GraphQLClient client = GraphQLClient(
-            link: httpLink,
+            link: link,
             cache: GraphQLCache(),
           );
 
@@ -329,6 +350,8 @@ class SearchButton extends StatelessWidget {
     final Map<String, dynamic> queryVariables = {
       'id': createdRouteId,
     };
+    // Imprimir el encabezado aquí antes de realizar la solicitud
+    // print("Authorization Header: Bearer ");
 
     final QueryResult queryResult = await client.query(
       QueryOptions(
@@ -342,6 +365,8 @@ class SearchButton extends StatelessWidget {
       final routeData = queryResult.data!['getRoute'];
 
       var orderingString = routeData['ordering'].toString();
+
+      print("Ordering String: $routeData");
 
       orderingString = orderingString
           .replaceAll(') ', '), ')

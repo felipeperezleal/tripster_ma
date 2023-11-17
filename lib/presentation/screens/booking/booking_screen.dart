@@ -143,8 +143,7 @@ class BookingScreenState extends State<BookingScreen> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () async {
-                formData['booking_user_id'] =
-                    int.tryParse(userController.text) ?? 0;
+                formData['booking_user_id'] = userController.text;
                 formData['booking_flight_id'] =
                     int.tryParse(flightController.text) ?? 0;
                 formData['booking_date'] = currenDate;
@@ -156,9 +155,12 @@ class BookingScreenState extends State<BookingScreen> {
                 // Convierte el mapa a una cadena JSON
                 String jsonText = jsonEncode(formData);
                 log(jsonText);
-
+                final String? token = await _cargarPreferencias();
+                final AuthLink authLink =
+                    AuthLink(getToken: () async => 'Bearer $token');
+                final Link link = authLink.concat(httpLink);
                 final GraphQLClient client = GraphQLClient(
-                  link: httpLink,
+                  link: link,
                   cache: GraphQLCache(),
                 );
 
